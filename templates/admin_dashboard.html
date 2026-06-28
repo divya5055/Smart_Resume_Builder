@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="admin-container" style="padding:20px; font-family:Segoe UI;">
+
+    <!-- HEADER -->
+    <div class="admin-header" style="text-align:center; margin-bottom:20px;">
+        <h2>📊 Admin Dashboard</h2>
+        <p>Overview of users and activity</p>
+    </div>
+
+    <!-- MONTH FILTER -->
+    <div style="text-align:center; margin-bottom:20px;">
+        <form method="get" action="{{ url_for('admin_dashboard') }}">
+            <select name="month" onchange="this.form.submit()" style="padding:8px;">
+                <option value="">All Months</option>
+                {% for month in months %}
+                    <option value="{{ month }}" {% if month == selected_month %}selected{% endif %}>
+                        {{ month }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <!-- KPI CARD -->
+    <div style="display:flex; justify-content:center; margin-bottom:30px;">
+        <div style="padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:200px; text-align:center;">
+            <h3>Total Users</h3>
+            <p style="font-size:24px; font-weight:bold;">{{ total_users }}</p>
+        </div>
+    </div>
+
+    <!-- LINE CHART -->
+    <div style="max-width:800px; margin:auto;">
+        <h3 style="text-align:center;">📈 User Registration Trend</h3>
+        <canvas id="userLineChart" height="200"></canvas>
+    </div>
+
+    <!-- USER TABLE -->
+    <div style="margin-top:40px;">
+        <h3>👥 User Details</h3>
+
+        <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+            <thead>
+                <tr style="background:#f4f4f4;">
+                    <th style="padding:10px; border:1px solid #ddd;">ID</th>
+                    <th style="padding:10px; border:1px solid #ddd;">Username</th>
+                    <th style="padding:10px; border:1px solid #ddd;">Email</th>
+                    <th style="padding:10px; border:1px solid #ddd;">Joined At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td style="padding:10px; border:1px solid #ddd;">{{ user.id }}</td>
+                    <td style="padding:10px; border:1px solid #ddd;">{{ user.username }}</td>
+                    <td style="padding:10px; border:1px solid #ddd;">{{ user.email }}</td>
+                    <td style="padding:10px; border:1px solid #ddd;">{{ user.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<script>
+const labels = {{ dates | tojson }};
+const counts = {{ counts | tojson }};
+
+const ctx = document.getElementById('userLineChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Users Registered',
+            data: counts,
+            borderColor: '#4e73df',
+            backgroundColor: 'rgba(78,115,223,0.2)',
+            fill: true,
+            tension: 0.3,
+            pointBackgroundColor: '#4e73df',
+            pointBorderColor: '#fff',
+            pointRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: 'User Growth Over Time'
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Date'
+                }
+            },
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Number of Users'
+                }
+            }
+        }
+    }
+});
+</script>
+
+{% endblock %}

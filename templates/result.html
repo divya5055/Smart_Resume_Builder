@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Analysis Result</h2>
+
+<p><strong>ATS Score:</strong> {{ score }}%</p>
+
+<h3>Missing Skills</h3>
+<ul>
+    {% for skill in missing %}
+        <li>{{ skill }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Suggestions</h3>
+<p>{{ suggestion }}</p>
+
+{% endblock %}

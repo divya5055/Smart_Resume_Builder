@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Builder</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .ai-btn {
+            background: #2ecc71;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .add-btn {
+            background: #3498db;
+            margin-top: 15px;
+        }
+
+        .submit-btn {
+            background: #2980b9;
+            width: 100%;
+        }
+
+        .block {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Smart Resume Builder</h2>
+
+<form method="POST"
+action="{% if resume %}{{ url_for('resume_builder', resume_id=resume.id) }}{% else %}{{ url_for('resume_builder') }}{% endif %}">
+
+{% if resume %}
+<input type="hidden" name="resume_id" value="{{ resume.id }}">
+{% endif %}
+
+<!-- TEMPLATE -->
+<div class="section">
+    <h3>Select Template</h3>
+    <select name="template" required>
+        <option value="modern.html">Modern</option>
+        <option value="simple.html">Simple</option>
+        <option value="creative.html">Creative</option>
+        <option value="corporate_professional.html">Corporate Professional</option>
+    </select>
+</div>
+
+<!-- PERSONAL INFO -->
+<div class="section">
+    <h3>Personal Information</h3>
+
+    <input type="text" name="name" placeholder="Full Name"
+        value="{{ resume.name if resume else '' }}" required>
+
+    <input type="email" name="email" placeholder="Email"
+        value="{{ resume.email if resume else '' }}" required>
+
+    <input type="tel" name="phone" placeholder="Phone (10 digits)"
+        pattern="[6-9]{1}[0-9]{9}"
+        title="Enter valid 10-digit Indian phone number"
+        value="{{ resume.phone if resume else '' }}" required>
+
+    <input type="url" name="linkedin" placeholder="LinkedIn (optional)"
+        value="{{ resume.linkedin if resume else '' }}">
+
+    <input type="url" name="github" placeholder="GitHub (optional)"
+        value="{{ resume.github if resume else '' }}">
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+    <h3>Professional Summary</h3>
+
+    <textarea id="summary" name="summary">{{ resume.summary if resume else '' }}</textarea>
+
+    <button type="button" class="ai-btn"
+        onclick="enhanceText('summary','summary')">✨ AI Summary</button>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section">
+    <h3>Work Experience</h3>
+
+    <div id="experience-section">
+
+        <div class="block">
+            <input type="text" name="company[]" placeholder="Company">
+            <input type="text" name="role[]" placeholder="Role">
+            <input type="text" name="duration[]" placeholder="Duration">
+
+            <textarea name="description[]" placeholder="Description"></textarea>
+
+            <button type="button" class="ai-btn"
+                onclick="enhanceDynamic(this,'experience')">✨ AI Experience</button>
+        </div>
+
+    </div>
+
+    <button type="button" class="add-btn" onclick="addExperience()">+ Add More</button>
+</div>
+
+<!-- EDUCATION -->
+<div class="section">
+    <h3>Education</h3>
+
+    <div id="education-section">
+        <div class="block">
+            <input type="text" name="degree[]" placeholder="Degree">
+            <input type="text" name="college[]" placeholder="College">
+            <input type="text" name="year[]" placeholder="Year">
+        </div>
+    </div>
+
+    <button type="button" class="add-btn" onclick="addEducation()">+ Add More</button>
+</div>
+
+<!-- PROJECTS -->
+<div class="section">
+    <h3>Projects</h3>
+
+    <div id="project-section">
+
+        <div class="block">
+            <input type="text" name="project_title[]" placeholder="Project Title">
+
+            <textarea name="project_desc[]" placeholder="Project Description"></textarea>
+
+            <button type="button" class="ai-btn"
+                onclick="enhanceDynamic(this,'project')">✨ AI Project</button>
+        </div>
+
+    </div>
+
+    <button type="button" class="add-btn" onclick="addProject()">+ Add More</button>
+</div>
+
+<!-- SKILLS -->
+<div class="section">
+    <h3>Skills</h3>
+    <textarea name="skills">{{ resume.skills if resume else '' }}</textarea>
+</div>
+
+<button type="submit" class="submit-btn">💾 Generate Resume</button>
+
+</form>
+
+</div>
+
+<script>
+
+// Add Experience
+function addExperience() {
+    document.getElementById("experience-section").innerHTML += `
+        <div class="block">
+            <input type="text" name="company[]" placeholder="Company">
+            <input type="text" name="role[]" placeholder="Role">
+            <input type="text" name="duration[]" placeholder="Duration">
+            <textarea name="description[]" placeholder="Description"></textarea>
+
+            <button type="button" class="ai-btn"
+                onclick="enhanceDynamic(this,'experience')">✨ AI Experience</button>
+        </div>
+    `;
+}
+
+// Add Education
+function addEducation() {
+    document.getElementById("education-section").innerHTML += `
+        <div class="block">
+            <input type="text" name="degree[]" placeholder="Degree">
+            <input type="text" name="college[]" placeholder="College">
+            <input type="text" name="year[]" placeholder="Year">
+        </div>
+    `;
+}
+
+// Add Project
+function addProject() {
+    document.getElementById("project-section").innerHTML += `
+        <div class="block">
+            <input type="text" name="project_title[]" placeholder="Project Title">
+            <textarea name="project_desc[]" placeholder="Project Description"></textarea>
+
+            <button type="button" class="ai-btn"
+                onclick="enhanceDynamic(this,'project')">✨ AI Project</button>
+        </div>
+    `;
+}
+
+// AI Summary
+function enhanceText(fieldId, section) {
+    const text = document.getElementById(fieldId).value;
+
+    fetch('/enhance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text, section: section })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById(fieldId).value = data.enhanced_text;
+    });
+}
+
+// AI Dynamic
+function enhanceDynamic(button, section) {
+    const textarea = button.previousElementSibling;
+    const text = textarea.value;
+
+    button.innerText = "Generating...";
+
+    fetch('/enhance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text, section: section })
+    })
+    .then(res => res.json())
+    .then(data => {
+        textarea.value = data.enhanced_text;
+        button.innerText = "✨ AI " + section;
+    });
+}
+
+// Validation
+document.querySelector("form").addEventListener("submit", function(e) {
+
+    const phone = document.querySelector("input[name='phone']").value;
+    const email = document.querySelector("input[name='email']").value;
+
+    const phoneRegex = /^[6-9][0-9]{9}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!phoneRegex.test(phone)) {
+        alert("Enter valid phone number");
+        e.preventDefault();
+        return;
+    }
+
+    if (!emailRegex.test(email)) {
+        alert("Enter valid email");
+        e.preventDefault();
+        return;
+    }
+
+});
+</script>
+
+</body>
+</html>

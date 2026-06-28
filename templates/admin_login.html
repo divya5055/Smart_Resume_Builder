@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="admin-login-page">
+
+    <div class="admin-login-card">
+
+        <h3 class="mb-3">Admin Login</h3>
+
+        <form method="POST">
+
+            <div class="mb-2">
+                <label class="form-label">Username</label>
+                <input 
+                    type="text" 
+                    name="username" 
+                    class="form-control form-control-sm" 
+                    placeholder="Enter Admin Name" 
+                    required 
+                    autocomplete="off">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input 
+                    type="password" 
+                    name="password" 
+                    class="form-control form-control-sm" 
+                    placeholder="Enter Admin Password" 
+                    required 
+                    autocomplete="new-password">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 btn-sm">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

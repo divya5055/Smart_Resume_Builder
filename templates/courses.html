@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-section">
+
+    <!-- TITLE -->
+    <div class="section-header">
+        <h1 class="section-title">🎓 Course Recommendations</h1>
+    </div>
+
+    <!-- SEARCH FORM -->
+    <form method="POST" class="search-form">
+        
+        <input 
+            type="text" 
+            name="skill" 
+            placeholder="🔍 Search courses (Python, ML, AI...)" 
+            class="search-input"
+            required
+        >
+
+        <button type="submit" class="search-btn">
+            Search
+        </button>
+
+    </form>
+
+    <!-- SEARCH RESULT TEXT -->
+    <div class="section-subtitle">
+        Showing results for:
+        <strong>{{ request.form.get('skill', 'Python') }}</strong>
+    </div>
+
+    <!-- COURSES GRID -->
+    <div class="courses-container">
+
+        {% for course in courses %}
+            <div class="course-card">
+                
+                {% if course.thumbnail %}
+                    <img src="{{ course.thumbnail }}" class="course-img">
+                {% endif %}
+
+                <h4 class="course-title">{{ course.title }}</h4>
+
+                <a href="{{ course.link }}" target="_blank" class="watch-btn">
+                    ▶ Watch Course
+                </a>
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

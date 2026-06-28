@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body_class %}dashboard-page{% endblock %}
+{% block content %}
+
+<div class="dashboard-page-wrapper">
+
+    <h2 class="dashboard-title">Welcome {{ user }} 👋</h2>
+
+    <div class="dashboard-container">
+
+        <a href="{{ url_for('resume_builder') }}" class="card-btn">
+            Resume Builder
+        </a>
+
+        <a href="{{ url_for('analyzer') }}" class="card-btn">
+            Resume Analyzer
+        </a>
+
+        <a href="{{ url_for('jobs') }}" class="card-btn">
+            Job Search
+        </a>
+
+        <a href="{{ url_for('courses') }}" class="card-btn">
+            Course Recommendation
+        </a>
+
+        <a href="{{ url_for('admin_login') }}" class="card-btn admin">
+            Admin Login
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

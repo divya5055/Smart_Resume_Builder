@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Resume</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Edit Resume</h2>
+
+<form method="POST"
+action="{{ url_for('edit_resume', resume_id=resume.id) }}">
+
+<input type="hidden" name="resume_id" value="{{ resume.id }}">
+
+<!-- TEMPLATE -->
+<div class="section">
+    <h3>Select Template</h3>
+    <select name="template" required>
+        <option value="modern.html" {% if resume.template == 'modern.html' %}selected{% endif %}>Modern</option>
+        <option value="simple.html" {% if resume.template == 'simple.html' %}selected{% endif %}>Simple</option>
+        <option value="corporate professional.html" {% if resume.template == 'corporate professional.html' %}selected{% endif %}>Corporate Professional</option>
+        <option value="creative.html" {% if resume.template == 'creative.html' %}selected{% endif %}>Creative</option>
+    </select>
+</div>
+
+<!-- PERSONAL INFO -->
+<div class="section">
+    <h3>Personal Information</h3>
+
+    <input type="text" name="name" value="{{ resume.name }}" required>
+    <input type="email" name="email" value="{{ resume.email }}" required>
+    <input type="text" name="phone" value="{{ resume.phone }}">
+    <input type="text" name="address" value="{{ resume.address }}">
+    <input type="text" name="linkedin" value="{{ resume.linkedin }}">
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+    <h3>Professional Summary</h3>
+    <textarea name="summary" rows="5">{{ resume.summary }}</textarea>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section">
+    <h3>Work Experience</h3>
+
+    <div id="experience-section">
+        {% for exp in resume.experiences %}
+        <input type="text" name="company[]" value="{{ exp.company }}">
+        <input type="text" name="role[]" value="{{ exp.role }}">
+        <input type="text" name="duration[]" value="{{ exp.duration }}">
+        <textarea name="description[]">{{ exp.description }}</textarea>
+        {% endfor %}
+    </div>
+
+    <button type="button" onclick="addExperience()">+ Add More</button>
+</div>
+
+<!-- EDUCATION -->
+<div class="section">
+    <h3>Education</h3>
+
+    <div id="education-section">
+        {% for edu in resume.educations %}
+        <input type="text" name="degree[]" value="{{ edu.degree }}">
+        <input type="text" name="college[]" value="{{ edu.college }}">
+        <input type="text" name="year[]" value="{{ edu.year }}">
+        {% endfor %}
+    </div>
+
+    <button type="button" onclick="addEducation()">+ Add More</button>
+</div>
+
+<!-- PROJECTS -->
+<div class="section">
+    <h3>Projects</h3>
+
+    <div id="project-section">
+        {% for proj in resume.projects %}
+        <input type="text" name="project_title[]" value="{{ proj.title }}">
+        <textarea name="project_desc[]">{{ proj.description }}</textarea>
+        {% endfor %}
+    </div>
+
+    <button type="button" onclick="addProject()">+ Add More</button>
+</div>
+
+<!-- SKILLS -->
+<div class="section">
+    <h3>Skills</h3>
+    <textarea name="skills">{{ resume.skills }}</textarea>
+</div>
+
+<button type="submit">💾 Update Resume</button>
+
+</form>
+
+</div>
+
+<script>
+function addExperience() {
+    document.getElementById("experience-section").innerHTML += `
+        <input type="text" name="company[]" placeholder="Company">
+        <input type="text" name="role[]" placeholder="Role">
+        <input type="text" name="duration[]" placeholder="Duration">
+        <textarea name="description[]" placeholder="Description"></textarea>
+    `;
+}
+
+function addEducation() {
+    document.getElementById("education-section").innerHTML += `
+        <input type="text" name="degree[]" placeholder="Degree">
+        <input type="text" name="college[]" placeholder="College">
+        <input type="text" name="year[]" placeholder="Year">
+    `;
+}
+
+function addProject() {
+    document.getElementById("project-section").innerHTML += `
+        <input type="text" name="project_title[]" placeholder="Project Title">
+        <textarea name="project_desc[]" placeholder="Project Description"></textarea>
+    `;
+}
+</script>
+
+</body>
+</html>

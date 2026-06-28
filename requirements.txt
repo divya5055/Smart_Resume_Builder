@@ -1,0 +1,29 @@
+# Used to build the web application and manage routes/pages.
+flask
+
+# Used for login, logout, sessions, and user authentication.
+flask-login
+
+# Used to create secure forms with validation.
+flask-wtf
+
+# Used to connect Flask with database and manage tables/data.
+flask-sqlalchemy
+
+# Used to generate PDF resume files.
+reportlab
+
+# Used to read, merge, split, and extract text from PDF files.
+PyPDF2
+
+# Used to extract text from Word (.docx) files.
+docx2txt
+
+# Used to call external APIs like RapidAPI job search.
+requests
+
+# Used to convert HTML templates into PDF files.
+pdfkit
+
+# Used to add AI features like resume analysis and content generation.
+openai

@@ -1,0 +1,77 @@
+<div style="max-width:900px; margin:auto; font-family:Segoe UI, Arial;">
+
+    <!-- HEADER -->
+    <div style="background:linear-gradient(135deg,#6a11cb,#2575fc); color:white; padding:25px; text-align:center; border-radius:8px;">
+        <h1 style="margin:0;">{{ resume.name }}</h1>
+        <p style="margin:5px 0;">{{ resume.email }} | {{ resume.phone }}</p>
+        <p style="margin:5px 0;">{{ resume.address }}</p>
+        <p>{{ resume.linkedin }}</p>
+    </div>
+
+    <div style="padding:20px;">
+
+        <!-- SUMMARY -->
+        <div style="margin-bottom:20px;">
+            <h2 style="color:#2575fc;">Summary</h2>
+            <p>{{ resume.summary }}</p>
+        </div>
+
+        <!-- TWO COLUMN LAYOUT -->
+        <div style="display:flex; gap:20px;">
+
+            <!-- LEFT -->
+            <div style="width:50%;">
+
+                {% if resume.skills %}
+                <h2 style="color:#2575fc;">Skills</h2>
+                <p>{{ resume.skills }}</p>
+                {% endif %}
+
+                {% if education %}
+                <h2 style="color:#2575fc;">Education</h2>
+                {% for edu in education %}
+                    <p>
+                        <b>{{ edu.degree }}</b><br>
+                        {{ edu.college }} ({{ edu.year }})
+                    </p>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+
+            <!-- RIGHT -->
+            <div style="width:50%;">
+
+                {% if experience %}
+                <h2 style="color:#2575fc;">Experience</h2>
+                {% for exp in experience %}
+                    <div style="margin-bottom:10px;">
+                        <b>{{ exp.role }}</b><br>
+                        {{ exp.company }} ({{ exp.duration }})
+                        <p>{{ exp.description }}</p>
+                    </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if projects %}
+                <h2 style="color:#2575fc;">Projects</h2>
+                {% for proj in projects %}
+                    <p><b>{{ proj.title }}</b></p>
+                    <p>{{ proj.description }}</p>
+                {% endfor %}
+                {% endif %}
+
+                {% if certificates %}
+                <h2 style="color:#2575fc;">Certificates</h2>
+                {% for cert in certificates %}
+                    <p>{{ cert.name }}</p>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

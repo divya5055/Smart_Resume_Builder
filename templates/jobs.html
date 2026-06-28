@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4" style="margin-top: 80px; max-width: 1100px;">
+
+    <!-- TITLE -->
+    <div class="text-center mb-4">
+        <h3>💼 Job Search</h3>
+    </div>
+
+    <!-- SEARCH FORM -->
+    <form method="POST" class="row g-2 justify-content-center mb-4">
+
+        <div class="col-md-4">
+            <input 
+                type="text" 
+                name="query" 
+                class="form-control"
+                placeholder="Job role (e.g. Python Developer)"
+            >
+        </div>
+
+        <div class="col-md-4">
+            <input 
+                type="text" 
+                name="location" 
+                class="form-control"
+                placeholder="Location (e.g. Pune)"
+            >
+        </div>
+
+        <div class="col-md-2 d-grid">
+            <button class="btn btn-primary">Search</button>
+        </div>
+
+    </form>
+
+    <!-- JOB GRID -->
+    <div class="row">
+
+        {% for job in jobs %}
+        <div class="col-md-4 mb-4">
+
+            <div class="card h-100 shadow-sm p-3">
+
+                <h5 class="card-title">{{ job.job_title }}</h5>
+
+                <p class="mb-1">
+                    <strong>{{ job.employer_name }}</strong>
+                </p>
+
+                <p class="text-muted">
+                    📍 {{ job.job_city or 'N/A' }} <br>
+                    🕒 {{ job.job_employment_type or 'Full-time' }}
+                </p>
+
+                <a href="{{ job.job_apply_link }}" target="_blank" class="btn btn-success mt-auto">
+                    Apply Now
+                </a>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

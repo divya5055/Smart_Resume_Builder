@@ -1,0 +1,61 @@
+<div style="max-width:900px; margin:auto; font-family:Segoe UI, Arial; padding:20px; border:1px solid #ddd;">
+
+    <!-- HEADER -->
+    <div style="text-align:center; border-bottom:2px solid #333; padding-bottom:10px;">
+        <h1>{{ resume.name }}</h1>
+        <p>
+            {{ resume.email }} | {{ resume.phone }} | {{ resume.address }}
+        </p>
+        <p>{{ resume.linkedin }}</p>
+    </div>
+
+    <!-- SUMMARY -->
+    <h2 style="margin-top:20px; border-bottom:1px solid #ccc;">Summary</h2>
+    <p>{{ resume.summary }}</p>
+
+    <!-- SKILLS -->
+    {% if resume.skills %}
+    <h2 style="border-bottom:1px solid #ccc;">Skills</h2>
+    <p>{{ resume.skills }}</p>
+    {% endif %}
+
+    <!-- EXPERIENCE -->
+    {% if experience %}
+    <h2 style="border-bottom:1px solid #ccc;">Experience</h2>
+    {% for exp in experience %}
+        <div style="margin-bottom:10px;">
+            <b>{{ exp.role }}</b> — {{ exp.company }} ({{ exp.duration }})
+            <p>{{ exp.description }}</p>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- EDUCATION -->
+    {% if education %}
+    <h2 style="border-bottom:1px solid #ccc;">Education</h2>
+    {% for edu in education %}
+        <p>
+            <b>{{ edu.degree }}</b><br>
+            {{ edu.college }} ({{ edu.year }})
+        </p>
+    {% endfor %}
+    {% endif %}
+
+    <!-- PROJECTS -->
+    {% if projects %}
+    <h2 style="border-bottom:1px solid #ccc;">Projects</h2>
+    {% for proj in projects %}
+        <p><b>{{ proj.title }}</b></p>
+        <p>{{ proj.description }}</p>
+    {% endfor %}
+    {% endif %}
+
+    <!-- CERTIFICATES -->
+    {% if certificates %}
+    <h2 style="border-bottom:1px solid #ccc;">Certificates</h2>
+    {% for cert in certificates %}
+        <p>{{ cert.name }}</p>
+    {% endfor %}
+    {% endif %}
+
+</div>

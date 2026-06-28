@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="analyzer-wrapper container">
+
+    <h2 class="title text-center">Resume Analyzer</h2>
+
+    <div class="analyzer-box">
+
+        <!-- ================= FORM ================= -->
+        <div class="analyzer-form">
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <label>Upload Resume (PDF)</label>
+                <input type="file" name="resume" required>
+
+                <label>Paste Job Description</label>
+                <textarea name="jd" rows="6"
+                    placeholder="Paste Job Description here..." required></textarea>
+
+                <button type="submit">Analyze Resume</button>
+
+            </form>
+
+        </div>
+
+        <!-- ================= RESULT ================= -->
+        <div class="analyzer-result">
+
+            {% if result %}
+
+            <div class="result-card">
+
+                <h3 class="text-center mb-3">ATS Score</h3>
+
+                <!-- 🔥 Animated Circle -->
+                <div class="circle-wrap">
+                    <svg>
+                        <circle cx="70" cy="70" r="60"></circle>
+                        <circle cx="70" cy="70" r="60"
+                            style="stroke-dashoffset: calc(377 - (377 * {{ result.score }}) / 100);">
+                        </circle>
+                    </svg>
+                    <div class="circle-text">{{ result.score }}%</div>
+                </div>
+
+                <!-- 🔥 Progress Bar -->
+                <div class="progress mt-3">
+                    <div class="progress-bar 
+                        {% if result.score < 40 %}bg-danger
+                        {% elif result.score < 70 %}bg-warning
+                        {% else %}bg-success
+                        {% endif %}"
+                        style="width: {{ result.score }}%;">
+                    </div>
+                </div>
+
+                <!-- ✅ Matching Skills -->
+                <h5 class="mt-4">✅ Matching Skills</h5>
+                <div class="skills">
+                    {% for skill in result.matched %}
+                        <span class="good">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- ❌ Missing Skills -->
+                <h5 class="mt-4">❌ Missing Skills</h5>
+                <div class="skills">
+                    {% for skill in result.missing %}
+                        <span class="bad">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- 💡 Suggestions -->
+                <h5 class="mt-4">💡 Suggestions</h5>
+                <ul>
+                    {% for s in result.suggestions %}
+                        <li>{{ s }}</li>
+                    {% endfor %}
+                </ul>
+
+                <!-- 📊 GRAPH -->
+                <div class="mt-4">
+                    <canvas id="skillChart"></canvas>
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <!-- EMPTY STATE -->
+            <div class="empty-state">
+                Upload resume & paste JD to see analysis
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= CHART ================= -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% if result %}
+<script>
+const ctx = document.getElementById('skillChart');
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Matched Skills', 'Missing Skills'],
+        datasets: [{
+            data: [{{ result.matched|length }}, {{ result.missing|length }}]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'black'
+                }
+            }
+        }
+    }
+});
+</script>
+{% endif %}
+
+{% endblock %}

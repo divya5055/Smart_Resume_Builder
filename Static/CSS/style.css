@@ -1,0 +1,977 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ================= GLOBAL BACKGROUND ================= */
+body {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #1f4037, #99f2c8, #283c86, #45a247);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    color: #222; /* FIX: readable text */
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 30px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+/* ================= MAIN CONTAINER ================= */
+.main-container {
+    padding-top: 100px;
+}
+
+/* ================= AUTH (LOGIN / REGISTER) ================= */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Glass Card */
+.auth-card {
+    width: 350px;
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+/* Inputs */
+.auth-card input {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    color: black;
+}
+
+/* Button */
+.auth-card input[type="submit"] {
+    margin-top: 20px;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ================= DASHBOARD ================= */
+.dashboard-page-wrapper {
+    padding-top: 100px;
+    text-align: center;
+}
+
+.dashboard-title {
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.dashboard-container {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+/* Cards */
+.card-btn {
+    height: 160px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+
+    transition: all 0.3s ease;
+}
+
+.card-btn:hover {
+    transform: translateY(-10px) scale(1.05);
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+}
+
+/* Admin Card */
+.card-btn.admin {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+}
+
+/* ================= JOB PAGE ================= */
+.jobs-page-wrapper {
+    padding-top: 100px;
+    width: 85%;
+    margin: auto;
+}
+
+.job-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.job-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.job-form input,
+.job-form select {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    width: 200px;
+}
+
+.job-form button {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ================= COURSE PAGE ================= */
+.courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.course-card {
+    width: 300px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 2px 2px 10px #ccc;
+    text-align: center;
+    transition: 0.3s;
+    background: white;
+}
+
+.course-card:hover {
+    transform: scale(1.05);
+}
+
+.course-img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.watch-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: green;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* ================= ADMIN LOGIN ================= */
+.admin-login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background: linear-gradient(120deg, #2980b9, #6dd5fa);
+}
+
+.admin-login-card {
+    width: 320px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.admin-login-card input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    color: black;
+}
+
+.admin-login-card button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    background: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.admin-login-card button:hover {
+    background: #1f5f8b;
+}
+
+/* ================= ADMIN DASHBOARD ================= */
+.admin-container {
+    padding: 20px;
+    background: #f4f6f9;
+    min-height: 100vh;
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.admin-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ================= TABLE ================= */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user-table th {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+}
+
+.user-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* ================= FLASH MESSAGES ================= */
+p.success {
+    color: #00ffae;
+    text-align: center;
+}
+
+p.danger {
+    color: #ff4d4d;
+    text-align: center;
+}
+
+/* ================= SEARCH ================= */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 300px;
+    padding: 10px;
+    border-radius: 8px 0 0 8px;
+    border: 1px solid #ccc;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0 8px 8px 0;
+    border: none;
+    cursor: pointer;
+}
+.job-card-new {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.job-card-new:hover {
+    transform: translateY(-5px);
+}
+
+.job-card-new h5 {
+    font-weight: 600;
+}
+
+.job-card-new p {
+    margin: 5px 0;
+}
+
+.job-card-new .btn {
+    margin-top: 10px;
+}
+.job-card-new {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.job-card-new:hover {
+    transform: translateY(-5px);
+}
+/* ================= LOGIN PAGE ================= */
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+/* Card */
+.login-card {
+    width: 380px;
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+
+    text-align: center;
+    color: white;
+}
+
+/* Title */
+.login-title {
+    margin-bottom: 5px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.login-subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* Input group */
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 14px;
+}
+
+/* Inputs */
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+
+    border-radius: 8px;
+    border: none;
+
+    outline: none;
+    color: black;
+}
+
+/* Button */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+.login-footer {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: #00c6ff;
+    text-decoration: none;
+}
+.progress-bar {
+    font-weight: bold;
+    font-size: 16px;
+}
+/* ===== ANALYZER PAGE ===== */
+
+/* ================= ANALYZER (FINAL PROFESSIONAL UI) ================= */
+
+.analyzer-wrapper {
+    max-width: 1200px;
+    margin: 120px auto 40px auto;
+    padding: 20px;
+}
+
+/* TITLE */
+.title {
+    text-align: center;
+    font-size: 34px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 40px;
+}
+
+/* MAIN GRID */
+.analyzer-box {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+}
+
+/* FORM CARD */
+.analyzer-form {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(18px);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    color: black;
+}
+
+.analyzer-form label {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.analyzer-form input,
+.analyzer-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+/* BUTTON */
+.analyzer-form button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.analyzer-form button:hover {
+    transform: scale(1.05);
+}
+
+/* RESULT CARD */
+.analyzer-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-card {
+    width: 100%;
+    padding: 30px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* SCORE */
+.circle-wrap {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 20px auto;
+}
+
+.circle-wrap svg {
+    width: 160px;
+    height: 160px;
+    transform: rotate(-90deg);
+}
+
+.circle-wrap circle {
+    fill: none;
+    stroke-width: 10;
+    stroke: #eee;
+}
+
+.circle-wrap circle:nth-child(2) {
+    stroke: #007bff;
+    stroke-dasharray: 440;
+    transition: 1s ease;
+}
+
+/* SCORE TEXT */
+.circle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* PROGRESS BAR */
+.progress {
+    height: 12px;
+    border-radius: 10px;
+    background: #ddd;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* SKILLS */
+.skills {
+    margin-top: 10px;
+}
+
+.skills span {
+    display: inline-block;
+    margin: 5px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.good {
+    background: #28a745;
+    color: white;
+}
+
+.bad {
+    background: #dc3545;
+    color: white;
+}
+
+/* SUGGESTIONS */
+.result-card ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .analyzer-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ===== GLOBAL PAGE SPACING FIX ===== */
+
+.page-section {
+    padding: 120px 20px 40px 20px;  /* prevents navbar overlap */
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* SECTION HEADER */
+.section-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* TITLES */
+.section-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* SUBTITLE */
+.section-subtitle {
+    text-align: center;
+    margin: 15px 0 25px 0;
+    color: #444;
+    font-size: 16px;
+}
+
+/* COURSE TITLE FIX */
+.course-title {
+    font-size: 16px;
+    margin: 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* PREVENT OVERLAP ANYWHERE */
+h1, h2, h3, h4, p {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* SAFE FLEX WRAP */
+.courses-container,
+.dashboard-container,
+.row {
+    flex-wrap: wrap;
+}
+
+
+
+/* ===== JOBS GRID ===== */
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* JOB CARD */
+.job-card-new {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.job-card-new:hover {
+    transform: translateY(-5px);
+}
+
+/* TEXT STYLES */
+.job-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.job-company {
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.job-meta {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+
+
+/* ================= ADMIN LOGIN (FIXED SMALL + VISIBLE) ================= */
+
+.admin-login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    padding-top: 80px; /* avoids navbar overlap */
+
+    background: linear-gradient(120deg, #2980b9, #6dd5fa);
+}
+
+.admin-login-card {
+    width: 280px;              /* ✅ smaller width */
+    padding: 20px;             /* ✅ reduced padding */
+
+    background: white;
+    border-radius: 10px;
+
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+
+    text-align: center;
+}
+
+/* Inputs */
+.admin-login-card input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+
+    border-radius: 6px;
+    border: 1px solid #ccc;
+
+    font-size: 14px;
+}
+
+/* Button */
+.admin-login-card button {
+    margin-top: 12px;
+    width: 100%;
+    padding: 8px;
+
+    background: #2980b9;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.admin-login-card button:hover {
+    background: #1f5f8b;
+}
+
+/* Title */
+.admin-login-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+
+/* ================= GRAPH FIX ================= */
+
+.circle-wrap {
+    position: relative;
+    width: 140px;   /* slightly smaller but visible */
+    height: 140px;
+    margin: 20px auto;
+}
+
+.circle-wrap svg {
+    width: 140px;
+    height: 140px;
+    transform: rotate(-90deg);
+}
+
+/* Background circle */
+.circle-wrap circle:first-child {
+    stroke: #e6e6e6;   /* light gray background ring */
+    stroke-width: 10;
+    fill: none;
+}
+
+/* Progress circle */
+.circle-wrap circle:last-child {
+    stroke: #007bff;   /* strong visible blue */
+    stroke-width: 10;
+    fill: none;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 440;
+    stroke-dashoffset: 0;
+
+    transition: stroke-dashoffset 1s ease;
+}
+
+
+
+
+/* Page Layout */
+.page-section {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Search Form */
+.search-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    width: 60%;
+    min-width: 250px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.search-input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52,152,219,0.4);
+}
+
+.search-btn {
+    padding: 12px 20px;
+    border: none;
+    background: #3498db;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    background: #2980b9;
+}
+
+/* Job Card */
+.job-card {
+    background: white;
+    padding: 18px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.job-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Job Title */
+.job-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Company */
+.job-company {
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Location */
+.job-location {
+    font-size: 13px;
+    color: #888;
+}
+
+/* Description */
+.job-desc {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #444;
+}
+
+/* Apply Button */
+.apply-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: #2ecc71;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.apply-btn:hover {
+    background: #27ae60;
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-input {
+        width: 100%;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: center;
+    }
+}
